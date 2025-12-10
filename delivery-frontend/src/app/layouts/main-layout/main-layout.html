@@ -1,0 +1,72 @@
+<app-navbar></app-navbar>
+
+<main>
+    <router-outlet></router-outlet>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="row text-center text-md-start">
+
+            <div class="col-md-4 mb-4">
+                <h5 class="footer-title"><i class="fa-solid fa-utensils me-2"></i>Delivery UTP</h5>
+                <p class="footer-text">
+                    Tu mejor opción para pedir comida dentro del campus de la UTP.
+                    Ofrecemos una variedad de productos frescos y ofertas especiales para estudiantes.
+                </p>
+                <p class="copyright mt-3">&copy; 2025 Delivery UTP. Todos los derechos reservados.</p>
+            </div>
+
+            <div class="col-md-4 mb-4 text-center">
+                <h5 class="footer-title">Síguenos</h5>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4 text-md-end text-center">
+                <h5 class="footer-title">¿Tienes algún problema?</h5>
+                <p class="footer-text">Si tienes alguna queja, sugerencia o reclamación, no dudes en contactarnos.</p>
+                <button class="btn btn-warning btn-sm mt-2 fw-bold" (click)="abrirModalReclamacion(modalReclamacion)">
+                    <i class="fa-solid fa-book me-2"></i>Libro de Reclamaciones
+                </button>
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+<ng-template #modalReclamacion let-modal>
+    <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title"><i class="fa-solid fa-book-open me-2"></i>Libro de Reclamaciones</h5>
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="complaintForm">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Tipo:</label>
+                <select class="form-select" formControlName="tipoReclamacion">
+                    <option value="QUEJA">Queja (Malestar por el servicio)</option>
+                    <option value="RECLAMO">Reclamo (Disconformidad con producto)</option>
+                    <option value="SUGERENCIA">Sugerencia</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Descripción:</label>
+                <textarea class="form-control" rows="4" formControlName="descripcion" placeholder="Detalle lo sucedido..."></textarea>
+                <div *ngIf="complaintForm.get('descripcion')?.touched && complaintForm.get('descripcion')?.invalid" class="text-danger small mt-1">
+                    La descripción es obligatoria y debe tener al menos 10 caracteres.
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</button>
+        <button type="button" class="btn btn-warning fw-bold" [disabled]="complaintForm.invalid" (click)="enviarReclamacion()">
+            <i class="fa-solid fa-paper-plane me-2"></i>Enviar
+        </button>
+    </div>
+</ng-template>

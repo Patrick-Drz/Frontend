@@ -1,0 +1,51 @@
+<div class="main-container">
+  <div class="auth-card">
+    
+    <div class="tabs-header">
+      <div class="tab-item inactive" routerLink="/auth/login">INICIAR SESIÓN</div>
+      <div class="tab-item active">REGISTRARSE</div>
+    </div>
+
+    <div class="auth-body">
+      <div class="header-section">
+        <h2 class="welcome-title">Crear Cuenta</h2>
+        <p class="welcome-subtitle">Únete a nosotros hoy mismo</p>
+      </div>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        
+        <div class="input-wrapper">
+          <i class="fa-solid fa-user input-icon"></i>
+          <input type="text" placeholder="Nombre Completo" formControlName="nombreCompleto">
+          <div class="input-border"></div>
+        </div>
+
+        <div class="input-wrapper">
+          <i class="fa-solid fa-id-card input-icon"></i>
+          <input type="text" placeholder="Código Estudiante" formControlName="codigoEstudiante">
+          <div class="input-border"></div>
+        </div>
+
+        <div class="input-wrapper">
+          <i class="fa-solid fa-envelope input-icon"></i>
+          <input type="email" placeholder="Correo Institucional" formControlName="correo">
+          <div class="input-border"></div>
+        </div>
+
+        <div class="input-wrapper">
+          <i class="fa-solid fa-lock input-icon"></i>
+          <input type="password" placeholder="Crear Contraseña" formControlName="contrasena">
+          <div class="input-border"></div>
+        </div>
+
+        <div *ngIf="errorMessage" class="error-banner">
+          <i class="fa-solid fa-triangle-exclamation"></i> {{ errorMessage }}
+        </div>
+
+        <button type="submit" class="btn-submit" [disabled]="registerForm.invalid">
+          REGISTRARME
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

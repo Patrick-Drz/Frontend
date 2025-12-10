@@ -1,0 +1,43 @@
+<div class="main-container">
+  <div class="auth-card">
+    
+    <div class="tabs-header">
+      <div class="tab-item active">INICIAR SESIÓN</div>
+      <div class="tab-item inactive" routerLink="/auth/register">REGISTRARSE</div>
+    </div>
+
+    <div class="auth-body">
+      <div class="header-section">
+        <h2 class="welcome-title">Bienvenido</h2>
+        <p class="welcome-subtitle">Ingresa a tu cuenta para continuar</p>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        
+        <div class="input-wrapper">
+          <i class="fa-solid fa-envelope input-icon"></i>
+          <input type="email" placeholder="Correo Institucional" formControlName="correo">
+          <div class="input-border"></div>
+        </div>
+
+        <div class="input-wrapper">
+          <i class="fa-solid fa-lock input-icon"></i>
+          <input type="password" placeholder="Contraseña" formControlName="contrasena">
+          <div class="input-border"></div>
+        </div>
+
+        <div class="forgot-pass-wrapper">
+          <a routerLink="/auth/forgot-password" class="forgot-pass-link">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <div *ngIf="errorMessage" class="error-banner">
+          <i class="fa-solid fa-triangle-exclamation"></i> {{ errorMessage }}
+        </div>
+
+        <button type="submit" class="btn-submit" [disabled]="loginForm.invalid">
+          INGRESAR
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
